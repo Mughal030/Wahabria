@@ -12,6 +12,11 @@ jobs:
 
     - name: Install Kali Linux and RDP
       run: |
-        wget -O kali.sh https://bit.ly/3EM0kdd > /dev/null 2>&1
-        chmod +x kali.sh
-        ./kali.sh
+        sudo apt-get update
+        sudo apt-get install -y docker.io
+        sudo systemctl start docker
+        sudo docker pull danielguerra/ubuntu-xrdp:latest
+        sudo docker run -d -p 3389:3389 danielguerra/ubuntu-xrdp:latest
+        echo "Username: ubuntu"
+        echo "Password: ubuntu"
+        echo "RDP Address: $(curl -s ifconfig.me):3389"
