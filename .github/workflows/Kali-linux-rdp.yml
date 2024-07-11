@@ -24,23 +24,6 @@ jobs:
       run: |
         sudo docker pull danielguerra/ubuntu-xrdp:latest
         sudo docker run -d -p 3389:3389 danielguerra/ubuntu-xrdp:latest
-
-    - name: Install Ngrok
-      run: |
-        curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null
-        echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list
-        sudo apt-get update
-        sudo apt-get install ngrok
-
-    - name: Authenticate Ngrok
-      run: |
-        ngrok authtoken 2aZXezLqBOUh2vOrPxSDHtk49ry_51D44xXFnoBwjyrNwxsYS
-
-    - name: Start Ngrok Tunnel
-      run: |
-        nohup ngrok tcp 3389 &
-
-    - name: Get Ngrok URL
-      run: |
-        sleep 10
-        curl --silent --show-error http://127.0.0.1:4040/api/tunnels | jq -r .tunnels[0].public_url
+        echo "Username: ubuntu"
+        echo "Password: ubuntu"
+        echo "RDP Address: $(curl -s ifconfig.me):3389"
